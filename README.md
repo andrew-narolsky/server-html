@@ -120,7 +120,7 @@ git config --global credential.helper store
 
 2. Clone repository
 ```
-git clone https://github.com/andrew-narolsky/wordpress.git
+git clone https://github.com/andrew-narolsky/server-html.git
 ```
 
 ### Configure wordpress and docker
