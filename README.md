@@ -33,7 +33,7 @@ wp ALL=(ALL) NOPASSWD: ALL
 ```
 nano ~/.bashrc
 ----
-cd ~/wordpress/
+cd ~/server-html/
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 ```
