@@ -127,7 +127,7 @@ git clone https://github.com/andrew-narolsky/server-html.git
 
 1. Copy docker `docker/env-example` to `docker/.env` and change it's variables
 ```
-cd /home/wp/wordpress
+cd /home/wp/server-html
 cp .env-example .env
 ```
 
@@ -161,24 +161,24 @@ sudo apt-get install letsencrypt
 ```
 2. Get SSL certificates (change example.com to current domain)
 ```
-sudo certbot certonly -a webroot --webroot-path=/home/wp/wordpress/html/ -d EXAMPLE.com -d www.EXAMPLE.com
+sudo certbot certonly -a webroot --webroot-path=/home/wp/server-html/html/ -d EXAMPLE.com -d www.EXAMPLE.com
 ```
 
 3. Generate Strong Diffie-Hellman Group
 ```
-mkdir /home/wp/wordpress/letsencrypt/
-sudo openssl dhparam -out /home/wp/wordpress/letsencrypt/dhparam.pem 2048
+mkdir /home/wp/server-html/letsencrypt/
+sudo openssl dhparam -out /home/wp/server-html/letsencrypt/dhparam.pem 2048
 ```
 
 4. Copy certificate files to local directory (change example.com to current domain)
 ```
-sudo cp /etc/letsencrypt/live/EXAMPLE.com/fullchain.pem /home/wp/wordpress/letsencrypt/fullchain.pem
-sudo cp /etc/letsencrypt/live/EXAMPLE.com/privkey.pem /home/wp/wordpress/letsencrypt/privkey.pem
+sudo cp /etc/letsencrypt/live/EXAMPLE.com/fullchain.pem /home/wp/server-html/letsencrypt/fullchain.pem
+sudo cp /etc/letsencrypt/live/EXAMPLE.com/privkey.pem /home/wp/server-html/letsencrypt/privkey.pem
 ```
 
 5. Copy settings from `nginx/sites/site.conf.example-prod-ssl` to `nginx/sites/site.conf` and change `example.com` to current domain name
 ```
-cd /home/wp/wordpress
+cd /home/wp/server-html
 rm nginx/sites/site.conf
 cp nginx/sites/site.conf.example-prod-ssl nginx/sites/site.conf
 nano nginx/sites/site.conf
@@ -186,7 +186,7 @@ nano nginx/sites/site.conf
 
 6. Restart nginx container
 ```
-cd /home/wp/wordpress/ 
+cd /home/wp/server-html
 docker-compose restart wp_nginx
 ```
 
@@ -195,10 +195,10 @@ docker-compose restart wp_nginx
 sudo nano crontab -e
 ---
 # Copy certificate files to local directory
-49 2 * * 1 cp /etc/letsencrypt/live/EXAMPLE.com/fullchain.pem /home/wp/wordpress/letsencrypt/fullchain.pem
-49 2 * * 1 cp /etc/letsencrypt/live/EXAMPLE.com/privkey.pem /home/wp/wordpress/letsencrypt/privkey.pem
+49 2 * * 1 cp /etc/letsencrypt/live/EXAMPLE.com/fullchain.pem /home/wp/server-html/letsencrypt/fullchain.pem
+49 2 * * 1 cp /etc/letsencrypt/live/EXAMPLE.com/privkey.pem /home/wp/server-html/letsencrypt/privkey.pem
 
 # Restart nginx
-50 2 * * 1 cd /home/wp/wordpress/ && /usr/local/bin/docker-compose restart wp_nginx
+50 2 * * 1 cd /home/wp/server-html/ && /usr/local/bin/docker-compose restart wp_nginx
 ```
 ## Server health checker
