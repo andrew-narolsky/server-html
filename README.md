@@ -141,17 +141,10 @@ cp nginx/sites/site.conf.example-dev nginx/sites/site.conf
 sudo apt install make
 ```
 
-4. Download wp
-```
-make wp-install
-```
-
-5. Start docker containers
+4. Start docker containers
 ```
 make build
 ```
-
-6. Go to the site and install WordPress
 
 ### Configure SSL from Let's Encrypt
 
